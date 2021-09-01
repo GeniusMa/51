@@ -1,0 +1,5 @@
+"STARTUP.obj",
+"main.obj",
+"led.obj" 
+TO "text" 
+RAMSIZE(256) 
