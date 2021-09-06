@@ -1,0 +1,55 @@
+C51 COMPILER V7.00  HJ_C52                                                                 09/17/2011 18:40:29 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE HJ_C52
+OBJECT MODULE PLACED IN hj-c52.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE hj-c52.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          /*********************************************************************
+   2           *
+   3           *                         HJ-C52.c
+   4           *
+   5           *********************************************************************
+   6           * 描    述: HJ-C52主板初始化函数
+   7           * 开发平台: HJ-C52开发板+KEIL C51
+   8           ********************************************************************/
+   9          
+  10          #include "stc.h"/*包含STC单片机头文件*/
+  11          #include "hj-c52.h"/*包含DZ-80C52开发板头文件*/
+  12          
+  13          /*DZ-80C52主板初始化函数*/
+  14          void hjc52_init(void)
+  15          {
+  16   1              /* HJ-C52 引脚方向、输出初值定义 */
+  17   1      
+  18   1              
+  19   1              CS88=1;
+  20   1              CS88=0; 
+  21   1              FM=0;/*BZ*/
+  22   1              EN=0;/*让LCD1602数据口处于输入状态，相当于LCD1602使不能，让其释放数据总线*/
+  23   1              CS=1;/*TF卡使不能*/
+  24   1              RST=0;/*ds1302使不能*/
+  25   1      
+  26   1              CS88=1;
+  27   1              P0=0xff;/*关闭点阵管，所有列均不显示*/
+  28   1              CS88=0;/*输出被锁存*/
+  29   1              
+  30   1              P0=0;/*关闭点阵管显示*/
+  31   1      }
+  32          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     23    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

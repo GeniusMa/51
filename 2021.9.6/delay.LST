@@ -1,0 +1,246 @@
+C51 COMPILER V9.01   DELAY                                                                 03/04/2020 12:27:43 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN delay.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE delay.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+*** WARNING C500 IN LINE 1 OF DELAY.C: LICENSE ERROR (R230: CONNECT TO UVISION KERNEL FAILED)
+
+   1           /*********************************************************************
+   2           *
+   3           *                           delay.c
+   4           *
+   5           *********************************************************************
+   6           * 描    述: 网上收集整理的延时函数，试用源码。
+   7           * 开发平台: KEIL+HL-1/HJ-3G/HJ-C52开发板*/
+   8          
+   9          #include "stc.h"/*包含STC单片机头文件*/
+  10          #include "hjc52.h"/*包含HJ-C52开发板头文件*/
+  11          #include "delay.h"/*包含网上收集的延时函数头文件*/
+  12          #include <intrins.h>/*包含含有_nop_()函数的头文件*/
+  13          
+  14          /*一些固定延时函数*/
+  15          
+  16          /*1uS延时函数*/
+  17          /*FOSC=11.0592、12、22.1184MHZ时，适用*/
+  18          /*其他晶振频率时，要调整_nop_();语句的句数，_nop_();语句的句数=FOSC-10*/
+  19          void delay1us()
+  20          {
+  21   1              #if FOSC==11059200
+  22   1                      _nop_();
+  23   1              #elif FOSC==12000000
+                              _nop_();_nop_();
+                      #elif FOSC==22118400
+                              _nop_();_nop_();_nop_();_nop_();_nop_();
+                              _nop_();_nop_();_nop_();_nop_();_nop_();
+                              _nop_();_nop_();
+                      #endif
+  30   1      }
+  31          
+  32          /*2uS延时函数*/
+  33          /*FOSC=11.0592、12、22.1184MHZ时，适用*/
+  34          /*其他晶振频率时，要调整_nop_();语句的句数，_nop_();语句的句数=2*FOSC-10*/
+  35          void delay2us()
+  36          {
+  37   1              #if FOSC==11059200
+  38   1                      _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+  39   1                      _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+  40   1                      _nop_();        _nop_();
+  41   1              #elif FOSC==12000000
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        
+                      #elif FOSC==22118400
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        _nop_();
+                              _nop_();        _nop_();        _nop_();        _nop_();        
+                      #endif
+  54   1      }
+C51 COMPILER V9.01   DELAY                                                                 03/04/2020 12:27:43 PAGE 2   
+
+  55          
+  56          
+  57          /*5uS延时函数*/
+  58          void delay5us()
+  59          {
+  60   1              delay8((FOSC/1000000*5-18)/10);
+  61   1      }
+  62          
+  63          /*10uS延时函数*/
+  64          void delay10us()
+  65          {
+  66   1              delay8((FOSC/1000000*10-18)/10);
+  67   1      }
+  68          
+  69          
+  70          /*20uS延时函数*/
+  71          void delay20us()
+  72          {
+  73   1              delay8((FOSC/1000000*20-18)/10);
+  74   1      }
+  75          /*50uS延时函数*/
+  76          void delay50us()
+  77          {
+  78   1              delay8((FOSC/1000000*50-18)/10);
+  79   1      }
+  80          /*100uS延时函数*/
+  81          void delay100us()
+  82          {
+  83   1              delay((0.1*FOSC/1000-24)/13);
+  84   1      }
+  85          /*200uS延时函数*/
+  86          void delay200us()
+  87          {
+  88   1              delay((0.2*FOSC/1000-24)/13);
+  89   1      }
+  90          /*500uS延时函数*/
+  91          void delay500us()
+  92          {
+  93   1              delay((0.5*FOSC/1000-24)/13);
+  94   1      }
+  95          /*1mS延时函数*/
+  96          void delay1ms()
+  97          {
+  98   1              delay((1*FOSC/1000-24)/13);
+  99   1      }
+ 100          /*2mS延时函数*/
+ 101          void delay2ms()
+ 102          {
+ 103   1              delay((2*FOSC/1000-24)/13);
+ 104   1      }
+ 105          /*5mS延时函数*/
+ 106          void delay5ms()
+ 107          {
+ 108   1              delay((5*FOSC/1000-24)/13);
+ 109   1      }
+ 110          /*10mS延时函数*/
+ 111          void delay10ms()
+ 112          {
+ 113   1              delay((10*FOSC/1000-24)/13);
+ 114   1      }
+ 115          /*20mS延时函数*/
+ 116          void delay20ms()
+C51 COMPILER V9.01   DELAY                                                                 03/04/2020 12:27:43 PAGE 3   
+
+ 117          {
+ 118   1              delayms(20);
+ 119   1      }
+ 120          /*50mS延时函数*/
+ 121          void delay50ms()
+ 122          {
+ 123   1              delayms(50);
+ 124   1      }
+ 125          /*100mS延时函数*/
+ 126          void delay100ms()
+ 127          {
+ 128   1              delayms(100);
+ 129   1      }
+ 130          /*200mS延时函数*/
+ 131          void delay200ms()
+ 132          {
+ 133   1              delayms(200);
+ 134   1      }
+ 135          /*500mS延时函数*/
+ 136          void delay500ms()
+ 137          {
+ 138   1              delays(0.5);
+ 139   1      }
+ 140          /*1S延时函数*/
+ 141          void delay1s()
+ 142          {
+ 143   1              delays(1);
+ 144   1      }
+ 145          /*2S延时函数*/
+ 146          void delay2s()
+ 147          {
+ 148   1              delays(2);
+ 149   1      }
+ 150          /*5S延时函数*/
+ 151          void delay5s()
+ 152          {
+ 153   1              delays(5);
+ 154   1      }
+ 155          /*10S延时函数*/
+ 156          void delay10s()
+ 157          {
+ 158   1              delays(10);
+ 159   1      }
+ 160          
+ 161          /*0.8us--116us延时函数(FOSC=22.1184M时)*/
+ 162          /*1.5us--214us延时函数(FOSC=12M时)*/
+ 163          /*1.6us--232us延时函数(FOSC=11.0592M时)*/
+ 164          /*延时时间：(18+10t)/FOSC*/
+ 165          /*最大延时：2568/FOSC*/
+ 166          /*最小延时：18/FOSC*/
+ 167          /*设要延时的时间为T(常量，单位为us),调用方式:delay8((FOSC/1000000*T-18)/10)*/
+ 168          /*例如要延时的时间为100us,调用方式:delay8((FOSC/1000000*100-18)/10)*/
+ 169          void delay8(unsigned char t)
+ 170          {
+ 171   1              unsigned char i;        
+ 172   1              for(i=t;i;i--);
+ 173   1      }
+ 174          
+ 175          /*1.1us--38.5ms延时函数(FOSC=22.1184M时)*/
+ 176          /*2us--70.9ms延时函数(FOSC=12M时)*/
+ 177          /*2.2us--77ms延时函数(FOSC=11.0592M时)*/
+ 178          /*延时时间：(13t+24)/FOSC
+C51 COMPILER V9.01   DELAY                                                                 03/04/2020 12:27:43 PAGE 4   
+
+ 179          /*最大延时：851979/FOSC 
+ 180          /*最小延时：24/FOSC             
+ 181          /*设要延时的时间为T(常量，单位为ms),调用方式:delay((T*FOSC/1000-24)/13)*/
+ 182          /*例如要延时的时间为10ms,调用方式:delay((10*FOSC/1000-24)/13)*/
+ 183          void delay(unsigned int t)
+ 184          {
+ 185   1              unsigned int i; 
+ 186   1              for(i=t;i;i--);
+ 187   1      }
+ 188          
+ 189          
+ 190          
+ 191          /*一个毫秒级可变延时函数*/
+ 192          /*功  能：实现与参数直接对应的时间（单位为毫秒）的延时*/
+ 193          /*参  数：范围1到255*/
+ 194          /*返回值：无*/
+ 195          void delayms(unsigned char t)
+ 196          {
+ 197   1              unsigned char j;        
+ 198   1              for(j=t;j;j--)  
+ 199   1                      delay1ms();/*1ms延时*/
+ 200   1      }
+ 201            
+ 202          
+ 203          /*一个秒级可变延时函数*/
+ 204          /*功  能：实现与参数直接对应的时间（单位为秒）的延时*/
+ 205          /*参  数：范围0.01到42949672*/
+ 206          /*返回值：无*/
+ 207          void delays(float t)
+ 208          {
+ 209   1              unsigned int j;
+ 210   1              j=t*100;
+ 211   1         while(j--)
+ 212   1              {
+ 213   2                      delay10ms();/*10ms延时*/
+ 214   2              }
+ 215   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    244    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

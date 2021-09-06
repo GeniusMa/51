@@ -1,0 +1,5 @@
+"main.obj",
+"delay.obj",
+"hjc52.obj" 
+TO "HJ-C52" 
+RAMSIZE(256) 
